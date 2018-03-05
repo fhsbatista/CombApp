@@ -1,10 +1,12 @@
 package com.example.fbatista.combapp.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by fbatista on 04/03/18.
  */
 
-public class Abastecimento {
+public class Abastecimento implements Serializable {
 
 
     private String data;
@@ -32,5 +34,45 @@ public class Abastecimento {
         this.nomePosto = nomePosto;
         this.nomeMotorista = nomeMotorista;
         this.nomeFrentista = nomeFrentista;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getNumeroFrota() {
+        return numeroFrota;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public String getContador() {
+        return contador;
+    }
+
+    public String getTipoCombustivel() {
+        return tipoCombustivel;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public String getNomePosto() {
+        return nomePosto;
+    }
+
+    public String getNomeMotorista() {
+        return nomeMotorista;
+    }
+
+    public String getNomeFrentista() {
+        return nomeFrentista;
     }
 }
