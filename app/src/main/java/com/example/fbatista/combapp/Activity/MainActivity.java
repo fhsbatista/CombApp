@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.fbatista.combapp.Helper.AbastecimentoDAO;
 import com.example.fbatista.combapp.Model.Abastecimento;
 import com.example.fbatista.combapp.R;
 
@@ -120,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.salvar :
                 enviarEmail(geraAbastecimento());
+                AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(getApplicationContext());
+                abastecimentoDAO.salvar(geraAbastecimento());
+                finish();
                 break;
 
         }

@@ -13,16 +13,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.fbatista.combapp.Adapter.AbastecimentoAdapter;
+import com.example.fbatista.combapp.Helper.DbHelper;
 import com.example.fbatista.combapp.Model.Abastecimento;
 import com.example.fbatista.combapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AbastecimentoAdapter abastecimentoAdapter;
-    private List<Abastecimento> listaAbastecimento;
+    private List<Abastecimento> listaAbastecimento = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
+
+        DbHelper db = new DbHelper(getApplicationContext());
 
         carregarListaAbastecimento();
 
