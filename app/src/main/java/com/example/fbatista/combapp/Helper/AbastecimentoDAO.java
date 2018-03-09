@@ -2,11 +2,13 @@ package com.example.fbatista.combapp.Helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.fbatista.combapp.Model.Abastecimento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,6 +68,38 @@ public class AbastecimentoDAO implements IAbastecimentoDAO{
 
     @Override
     public List<Abastecimento> listar() {
-        return null;
+
+        List<Abastecimento> listaAbastecimentos = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DbHelper.TABELA_ABASTECIMENTOS + " ;";
+        Cursor c = le.rawQuery(sql, null);
+        c.moveToPosition(c.getCount() + 1);
+        while(c.moveToPrevious()){
+            Abastecimento abastecimento = new Abastecimento();
+            abastecimento.setId(c.getLong(c.getColumnIndex("id")));
+            Log.i("Testebanco", abastecimento.getId().toString());
+            abastecimento.setData(c.getString(c.getColumnIndex("data")));
+            Log.i("Testebanco", abastecimento.getData());
+            abastecimento.setNumeroFrota(c.getString(c.getColumnIndex("numeroFrota")));
+            abastecimento.setPlaca(c.getString(c.getColumnIndex("placa")));
+            abastecimento.setContador(c.getString(c.getColumnIndex("contador")));
+            abastecimento.setTipoCombustivel(c.getString(c.getColumnIndex("tipoCombustivel")));
+            abastecimento.setQuantidade(c.getString(c.getColumnIndex("quantidade")));
+            abastecimento.setValor(c.getString(c.getColumnIndex("valor")));
+            abastecimento.setNomePosto(c.getString(c.getColumnIndex("nomePosto")));
+            abastecimento.setNomeMotorista(c.getString(c.getColumnIndex("nomeMotorista")));
+            abastecimento.setNomeFrentista(c.getString(c.getColumnIndex("nomeFrentista")));
+
+            listaAbastecimentos.add(abastecimento);
+
+
+
+
+        }
+        c.close();
+
+
+
+        return listaAbastecimentos;
     }
 }

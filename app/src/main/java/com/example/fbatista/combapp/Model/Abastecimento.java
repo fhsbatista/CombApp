@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Abastecimento implements Serializable {
 
-
+    private Long id;
     private String data;
     private String numeroFrota;
     private String placa;
@@ -19,6 +19,9 @@ public class Abastecimento implements Serializable {
     private String nomePosto;
     private String nomeMotorista;
     private String nomeFrentista;
+
+    public Abastecimento() {
+    }
 
     public Abastecimento(String data, String numeroFrota, String placa,
                          String contador, String tipoCombustivel, String quantidade,
@@ -33,6 +36,54 @@ public class Abastecimento implements Serializable {
         this.valor = valor;
         this.nomePosto = nomePosto;
         this.nomeMotorista = nomeMotorista;
+        this.nomeFrentista = nomeFrentista;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNumeroFrota(String numeroFrota) {
+        this.numeroFrota = numeroFrota;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public void setContador(String contador) {
+        this.contador = contador;
+    }
+
+    public void setTipoCombustivel(String tipoCombustivel) {
+        this.tipoCombustivel = tipoCombustivel;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public void setNomePosto(String nomePosto) {
+        this.nomePosto = nomePosto;
+    }
+
+    public void setNomeMotorista(String nomeMotorista) {
+        this.nomeMotorista = nomeMotorista;
+    }
+
+    public void setNomeFrentista(String nomeFrentista) {
         this.nomeFrentista = nomeFrentista;
     }
 

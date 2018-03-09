@@ -13,12 +13,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Abastecimentos.db";
     private static final int DATABASE_VERSION = 1;
-    public static final String TABELA_ABASTECIMENTOS = "Abastecimentos";
+    public static final String TABELA_ABASTECIMENTOS = "Registros";
 
     //Codigos SQL
     private static final String SQL_CRIAR_TABELA_ABASTECIMENTOS = "" +
             "CREATE TABLE " + TABELA_ABASTECIMENTOS + "(" +
-            "id INTEGER PRIMARY_KEY AUTO_INCREMENT, " +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "data TEXT," +
             "numeroFrota TEXT, " +
             "placa TEXT, " +
@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "quantidade TEXT, " +
             "valor TEXT, " +
             "nomePosto TEXT, " +
-            "nomeMototista TEXT, " +
+            "nomeMotorista TEXT, " +
             "nomeFrentista TEXT )";
 
 

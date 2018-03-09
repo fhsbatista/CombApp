@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.fbatista.combapp.Adapter.AbastecimentoAdapter;
+import com.example.fbatista.combapp.Helper.AbastecimentoDAO;
 import com.example.fbatista.combapp.Helper.DbHelper;
 import com.example.fbatista.combapp.Model.Abastecimento;
 import com.example.fbatista.combapp.R;
@@ -41,7 +42,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        DbHelper db = new DbHelper(getApplicationContext());
 
         carregarListaAbastecimento();
 
@@ -50,6 +50,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void carregarListaAbastecimento(){
+
+        //Recuperando dados
+        AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(getApplicationContext());
+        listaAbastecimento = abastecimentoDAO.listar();
 
         //Configurando o adapter
         abastecimentoAdapter = new AbastecimentoAdapter(listaAbastecimento);

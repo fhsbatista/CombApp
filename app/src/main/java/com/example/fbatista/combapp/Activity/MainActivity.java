@@ -18,6 +18,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+
 public class MainActivity extends AppCompatActivity {
 
     private static String[] tiposCombustivel = new String[] {"Diesel Comum", "Diesel S10","Etanol", "Gasolina"};
@@ -54,10 +56,15 @@ public class MainActivity extends AppCompatActivity {
         mNomeMotorista = findViewById(R.id.et_nome_motorista);
         mNomeFrentista = findViewById(R.id.et_nome_frentista);
 
-        //Preenche o campo de data com a data corrente
+        //Preenche o campo "Data" com a data corrente
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         mData.setText(dateFormat.format(date));
+
+        //Mascara para o campo "Placa".
+        MaskEditTextChangedListener maskPlaca = new MaskEditTextChangedListener("###-####", mPlaca);
+        mPlaca.addTextChangedListener(maskPlaca);
+
 
 
     }
@@ -106,6 +113,32 @@ public class MainActivity extends AppCompatActivity {
         return abastecimento;
     }
 
+    public boolean validaFormulario(){
+
+        if(mTipoCombustivel.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Preencha o Tipo de Combustivel", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (mNumeroFrota.getText().toString().isEmpty()){
+            Toast.makeText(this, "Preencha o numero da Frota", Toast.LENGTH_LONG).show();
+            return false;
+        } else if(mData.getText().toString().isEmpty()){
+            Toast.makeText(this, "Preencha a Data do abastecimento", Toast.LENGTH_LONG).show();
+            return false;
+        } else if(mQuantidade.getText().toString().isEmpty()){
+            Toast.makeText(this, "Preencha a quantidade de litros", Toast.LENGTH_LONG).show();
+            return false;
+        } else if(mContador.getText().toString().isEmpty()){
+            Toast.makeText(this, "Preencha o Hodometro ou Horimetro", Toast.LENGTH_LONG).show();
+            return false;
+        } else if(mNomePosto.getText().toString().isEmpty()){
+            Toast.makeText(this, "Preencha o nome do Posto (Posto, Comboio etc)", Toast.LENGTH_LONG).show();
+            return false;
+        } else
+            return true;
+
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -120,11 +153,13 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
 
             case R.id.salvar :
-                enviarEmail(geraAbastecimento());
-                AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(getApplicationContext());
-                abastecimentoDAO.salvar(geraAbastecimento());
-                finish();
-                break;
+                if(validaFormulario()) {
+                    enviarEmail(geraAbastecimento());
+                    AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(getApplicationContext());
+                    abastecimentoDAO.salvar(geraAbastecimento());
+                    finish();
+                    break;
+                }
 
         }
 

@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Placa"
-                android:inputType="textCapCharacters" />
+                android:inputType="textCapCharacters|textNoSuggestions" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -101,7 +101,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Tipo de combustivel" />
+            android:hint="Tipo de combustivel"
+            android:inputType="textCapCharacters"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@id/et_nome_posto"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -113,7 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nome do posto"
-            android:inputType="textCapCharacters" />
+            android:inputType="textCapCharacters"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout

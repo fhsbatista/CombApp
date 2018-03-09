@@ -14,7 +14,7 @@
         </activity>
         <activity
             android:name=".Activity.HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label="Listagem de Abastecimentos"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
