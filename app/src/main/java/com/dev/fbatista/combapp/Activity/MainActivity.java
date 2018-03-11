@@ -1,4 +1,4 @@
-package com.example.fbatista.combapp.Activity;
+package com.dev.fbatista.combapp.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +10,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.fbatista.combapp.Helper.AbastecimentoDAO;
-import com.example.fbatista.combapp.Model.Abastecimento;
-import com.example.fbatista.combapp.R;
+import com.dev.fbatista.combapp.Helper.AbastecimentoDAO;
+import com.dev.fbatista.combapp.Model.Abastecimento;
+import com.dev.fbatista.combapp.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

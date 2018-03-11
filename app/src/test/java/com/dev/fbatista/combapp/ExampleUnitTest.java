@@ -1,4 +1,4 @@
-package com.example.fbatista.combapp;
+package com.dev.fbatista.combapp;
 
 import org.junit.Test;
 

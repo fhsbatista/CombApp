@@ -1,10 +1,9 @@
-package com.example.fbatista.combapp.Activity;
+package com.dev.fbatista.combapp.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,12 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
-import com.example.fbatista.combapp.Adapter.AbastecimentoAdapter;
-import com.example.fbatista.combapp.Helper.AbastecimentoDAO;
-import com.example.fbatista.combapp.Helper.DbHelper;
-import com.example.fbatista.combapp.Model.Abastecimento;
-import com.example.fbatista.combapp.R;
-import com.example.fbatista.combapp.RecyclerItemClickListener;
+import com.dev.fbatista.combapp.Adapter.AbastecimentoAdapter;
+import com.dev.fbatista.combapp.Helper.AbastecimentoDAO;
+import com.dev.fbatista.combapp.Model.Abastecimento;
+import com.dev.fbatista.combapp.R;
+import com.dev.fbatista.combapp.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.fbatista.combapp.Model;
+package com.dev.fbatista.combapp.Model;
 
 import java.io.Serializable;
 

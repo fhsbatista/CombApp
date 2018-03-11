@@ -1,6 +1,6 @@
-package com.example.fbatista.combapp.Helper;
+package com.dev.fbatista.combapp.Helper;
 
-import com.example.fbatista.combapp.Model.Abastecimento;
+import com.dev.fbatista.combapp.Model.Abastecimento;
 
 import java.util.List;
 

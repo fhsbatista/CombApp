@@ -1,4 +1,4 @@
-package com.example.fbatista.combapp.Helper;
+package com.dev.fbatista.combapp.Helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,8 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.fbatista.combapp.Activity.HomeActivity;
-import com.example.fbatista.combapp.Model.Abastecimento;
+import com.dev.fbatista.combapp.Model.Abastecimento;
 
 import java.util.ArrayList;
 import java.util.List;

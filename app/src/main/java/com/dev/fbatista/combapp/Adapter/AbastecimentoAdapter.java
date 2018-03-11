@@ -1,4 +1,4 @@
-package com.example.fbatista.combapp.Adapter;
+package com.dev.fbatista.combapp.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.fbatista.combapp.Model.Abastecimento;
-import com.example.fbatista.combapp.R;
+import com.dev.fbatista.combapp.Model.Abastecimento;
+import com.dev.fbatista.combapp.R;
 
 import java.util.List;
 
