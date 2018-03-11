@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.fbatista.combapp.Activity.HomeActivity;
 import com.example.fbatista.combapp.Model.Abastecimento;
 
 import java.util.ArrayList;
@@ -19,10 +21,12 @@ public class AbastecimentoDAO implements IAbastecimentoDAO{
 
     private SQLiteDatabase escreve;
     private SQLiteDatabase le;
+    private Context context;
 
     public AbastecimentoDAO(Context context) {
 
         DbHelper db = new DbHelper(context);
+        this.context = context;
 
         escreve = db.getWritableDatabase();
         le = db.getReadableDatabase();
@@ -47,6 +51,8 @@ public class AbastecimentoDAO implements IAbastecimentoDAO{
 
            escreve.insert(DbHelper.TABELA_ABASTECIMENTOS, null, cv);
            Log.e("Bancodedados", "Dado de Abastecimento inserido com sucesso");
+           Toast.makeText(context, "Sucesso ao salvar o abastecimento!", Toast.LENGTH_SHORT).show();
+
 
 
         }catch (Exception e){
@@ -57,13 +63,58 @@ public class AbastecimentoDAO implements IAbastecimentoDAO{
     }
 
     @Override
-    public boolean alterar(Abastecimento abastecimento) {
-        return false;
+    public boolean atualizar(Abastecimento abastecimento) {
+
+
+
+        ContentValues cv = new ContentValues();
+        cv.put("data", abastecimento.getData());
+        cv.put("numeroFrota", abastecimento.getNumeroFrota());
+        cv.put("placa", abastecimento.getPlaca());
+        cv.put("contador", abastecimento.getContador());
+        cv.put("tipoCombustivel", abastecimento.getTipoCombustivel());
+        cv.put("quantidade", abastecimento.getQuantidade());
+        cv.put("valor", abastecimento.getValor());
+        cv.put("nomePosto", abastecimento.getNomePosto());
+        cv.put("nomeMotorista", abastecimento.getNomeMotorista());
+        cv.put("nomeFrentista", abastecimento.getNomeFrentista());
+
+
+        try{
+            String[] args = {abastecimento.getId().toString()};
+            escreve.update(DbHelper.TABELA_ABASTECIMENTOS, cv, "id=?", args );
+            Log.i("Bancodedados", "Sucesso ao atualizar o abastecimento.");
+            Toast.makeText(context, "Sucesso ao atualizar o abastecimento!", Toast.LENGTH_SHORT).show();
+
+
+
+        }catch (Exception e){
+            Log.i("Bancodedados", "Erro ao atualizar o abastecimento " + e.getMessage());
+            return false;
+        }
+
+
+        return true;
     }
 
     @Override
     public boolean deletar(Abastecimento abastecimento) {
-        return false;
+        
+
+        try{
+            String[] args = {abastecimento.getId().toString()};
+            escreve.delete(DbHelper.TABELA_ABASTECIMENTOS, "id=?", args);
+            Toast.makeText(context, "Registro removido com sucesso!", Toast.LENGTH_SHORT).show();
+            
+            
+            Log.i("Bancodedados", "Sucesso ao remover o abastecimento" );
+        }catch (Exception e){
+            Log.i("Bancodedados", "Erro ao remover o abastecimento" + e.getMessage());
+        }
+        
+        
+        
+        return true;
     }
 
     @Override
@@ -77,9 +128,7 @@ public class AbastecimentoDAO implements IAbastecimentoDAO{
         while(c.moveToPrevious()){
             Abastecimento abastecimento = new Abastecimento();
             abastecimento.setId(c.getLong(c.getColumnIndex("id")));
-            Log.i("Testebanco", abastecimento.getId().toString());
             abastecimento.setData(c.getString(c.getColumnIndex("data")));
-            Log.i("Testebanco", abastecimento.getData());
             abastecimento.setNumeroFrota(c.getString(c.getColumnIndex("numeroFrota")));
             abastecimento.setPlaca(c.getString(c.getColumnIndex("placa")));
             abastecimento.setContador(c.getString(c.getColumnIndex("contador")));

@@ -1,15 +1,18 @@
 package com.example.fbatista.combapp.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import com.example.fbatista.combapp.Adapter.AbastecimentoAdapter;
@@ -17,6 +20,7 @@ import com.example.fbatista.combapp.Helper.AbastecimentoDAO;
 import com.example.fbatista.combapp.Helper.DbHelper;
 import com.example.fbatista.combapp.Model.Abastecimento;
 import com.example.fbatista.combapp.R;
+import com.example.fbatista.combapp.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AbastecimentoAdapter abastecimentoAdapter;
     private List<Abastecimento> listaAbastecimento = new ArrayList<>();
+    private Abastecimento abastecimentoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,65 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.recyclerView);
+        //Configurando o click na recycler view
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerView,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
 
-        carregarListaAbastecimento();
+                                Abastecimento abastecimento = listaAbastecimento.get(position);
+
+                                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                                intent.putExtra("abastecimento", abastecimento);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                                //Recupera o abastecimento selecionado
+                                abastecimentoSelecionado = listaAbastecimento.get(position);
+
+                                //Cria o alertdialog
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(HomeActivity.this);
+                                dialog.setTitle("Confirmar Exclusao");
+                                dialog.setMessage("Deseja excluir este abastecimento?");
+
+                                dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(getApplicationContext());
+                                        abastecimentoDAO.deletar(abastecimentoSelecionado);
+                                        carregarListaAbastecimento();
+
+                                    }
+                                });
+
+                                dialog.setNegativeButton("Nao", null);
+
+                                //Cria e exibe a dialog
+                                dialog.create();
+                                dialog.show();
+
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
+
+
+
+
 
 
 
@@ -59,18 +121,22 @@ public class HomeActivity extends AppCompatActivity {
         abastecimentoAdapter = new AbastecimentoAdapter(listaAbastecimento);
 
         //Configurando o recycler view
-        recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
                 LinearLayout.VERTICAL));
         recyclerView.setAdapter(abastecimentoAdapter);
+
+
+
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        listaAbastecimento.clear();
         carregarListaAbastecimento();
     }
 }

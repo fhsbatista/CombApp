@@ -11,7 +11,7 @@ import java.util.List;
 public interface IAbastecimentoDAO {
 
     public boolean salvar(Abastecimento abastecimento);
-    public boolean alterar(Abastecimento abastecimento);
+    public boolean atualizar(Abastecimento abastecimento);
     public boolean deletar(Abastecimento abastecimento);
     public List<Abastecimento> listar();
 }
